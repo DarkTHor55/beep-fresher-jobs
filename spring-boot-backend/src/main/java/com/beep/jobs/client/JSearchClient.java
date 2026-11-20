@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestClient;
 
 import java.time.Instant;
@@ -70,7 +71,16 @@ public class JSearchClient implements JobSourceClient {
                         .retrieve()
                         .body(JsonNode.class);
             } catch (RuntimeException error) {
-                log.warn("JSearch query failed ({}): {}", query, error.getMessage());
+                if (error instanceof HttpStatusCodeException httpError) {
+                    int status = httpError.getStatusCode().value();
+                    log.warn("JSearch query failed ({}) with HTTP {}", query, status);
+                    if (status == 403 || status == 429) {
+                        log.warn("JSearch stopping remaining queries after HTTP {}", status);
+                        break;
+                    }
+                } else {
+                    log.warn("JSearch query failed ({}): {}", query, error.getClass().getSimpleName());
+                }
                 continue;
             }
 
