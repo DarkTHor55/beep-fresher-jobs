@@ -1,6 +1,8 @@
 import type { JobResponse, PageResponse, StatsResponse } from './types';
 
-const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
+const BASE_URL =
+  import.meta.env.VITE_API_BASE_URL?.trim() ||
+  'https://beep-fresher-jobs.onrender.com';
 
 function resolveUrl(path: string): string {
   if (path.startsWith('http://') || path.startsWith('https://')) {
