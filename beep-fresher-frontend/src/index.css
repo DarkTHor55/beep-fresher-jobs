@@ -1,0 +1,306 @@
+@import './styles/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  ::selection {
+    background: rgb(99 102 241 / 0.18);
+  }
+
+  body {
+    min-width: 320px;
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+      BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+      sans-serif;
+    line-height: 1.5;
+    transition: background-color 0.16s ease-out, color 0.16s ease-out;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  button {
+    font-family: inherit;
+    cursor: pointer;
+  }
+
+  input, select, textarea {
+    font-family: inherit;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+.hero-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: rgb(var(--surface));
+}
+
+.hero-panel::before {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  content: '';
+  pointer-events: none;
+  background: radial-gradient(ellipse at 90% 0%, rgb(var(--primary) / 0.08), transparent 34rem);
+}
+
+.job-card {
+  background: rgb(var(--surface));
+  border: 1px solid rgb(var(--border));
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-rest);
+  transition: transform 160ms ease-out, border-color 160ms ease-out, box-shadow 160ms ease-out;
+}
+
+.job-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.job-title-clamp {
+  display: -webkit-box;
+  min-height: 2.8em;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.role-chip {
+  display: inline-flex;
+  min-height: 28px;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: 9999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.role-indigo { background: rgb(var(--chip-indigo-bg)); color: rgb(var(--chip-indigo-text)); }
+.role-teal { background: rgb(var(--chip-teal-bg)); color: rgb(var(--chip-teal-text)); }
+.role-amber { background: rgb(var(--chip-amber-bg)); color: rgb(var(--chip-amber-text)); }
+.role-sky { background: rgb(var(--chip-sky-bg)); color: rgb(var(--chip-sky-text)); }
+.role-pink { background: rgb(var(--chip-pink-bg)); color: rgb(var(--chip-pink-text)); }
+.role-orange { background: rgb(var(--chip-orange-bg)); color: rgb(var(--chip-orange-text)); }
+.role-green { background: rgb(var(--chip-green-bg)); color: rgb(var(--chip-green-text)); }
+.role-violet { background: rgb(var(--chip-violet-bg)); color: rgb(var(--chip-violet-text)); }
+.role-lime { background: rgb(var(--chip-lime-bg)); color: rgb(var(--chip-lime-text)); }
+.role-gray { background: rgb(var(--chip-gray-bg)); color: rgb(var(--chip-gray-text)); }
+
+.dark .role-indigo { background: rgb(var(--chip-indigo-bg) / 0.15); }
+.dark .role-teal { background: rgb(var(--chip-teal-bg) / 0.15); }
+.dark .role-amber { background: rgb(var(--chip-amber-bg) / 0.15); }
+.dark .role-sky { background: rgb(var(--chip-sky-bg) / 0.15); }
+.dark .role-pink { background: rgb(var(--chip-pink-bg) / 0.15); }
+.dark .role-orange { background: rgb(var(--chip-orange-bg) / 0.15); }
+.dark .role-green { background: rgb(var(--chip-green-bg) / 0.15); }
+.dark .role-violet { background: rgb(var(--chip-violet-bg) / 0.15); }
+.dark .role-lime { background: rgb(var(--chip-lime-bg) / 0.15); }
+.dark .role-gray { background: rgb(var(--chip-gray-bg) / 0.15); }
+
+.dark .job-card:hover {
+  background: rgb(var(--surface-2));
+}
+
+.dark .shadow-sm,
+.dark .shadow-xl,
+.dark .shadow-2xl {
+  box-shadow: none;
+}
+
+.dark .bg-white { background-color: rgb(var(--surface)); }
+
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700 { color: rgb(var(--text)); }
+
+.dark .text-slate-600,
+.dark .text-slate-500 { color: rgb(var(--muted)); }
+
+.dark .border-slate-100,
+.dark .border-slate-200,
+.dark .border-slate-200\/70,
+.dark .border-slate-200\/80 { border-color: rgb(var(--border)); }
+
+.focus-ring:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgb(var(--primary));
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .job-card,
+  .job-card:hover { transform: none; transition: none; }
+}
+
+@layer components {
+  .container {
+    width: 100%;
+    max-width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .container {
+      max-width: 640px;
+      padding-left: 1.5rem;
+      padding-right: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .container {
+      max-width: 1024px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .container {
+      max-width: 1280px;
+    }
+  }
+
+  .card {
+    background-color: rgb(var(--surface));
+    border: 1px solid rgb(var(--border));
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-rest);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card:hover {
+      transform: none;
+      box-shadow: var(--color-shadow);
+    }
+  }
+
+  .btn-primary {
+    background-color: rgb(var(--primary));
+    color: rgb(var(--on-primary));
+    border: none;
+    border-radius: var(--radius-button);
+    min-height: 44px;
+    padding: 0.625rem 1.25rem;
+    font-weight: 600;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(var(--primary-hover));
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+  }
+
+  .input {
+    width: 100%;
+    background-color: rgb(var(--surface-2));
+    border: 1px solid rgb(var(--border));
+    border-radius: var(--radius-input);
+    padding: 0.75rem 1rem;
+    color: rgb(var(--text));
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .input:focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+    border-color: transparent;
+  }
+
+  .select {
+    width: 100%;
+    background-color: rgb(var(--surface-2));
+    border: 1px solid rgb(var(--border));
+    border-radius: var(--radius-input);
+    padding: 0.75rem 1rem;
+    color: rgb(var(--text));
+    font-size: 0.875rem;
+    appearance: none;
+    transition: border-color 0.2s ease;
+  }
+
+  .select:focus-visible {
+    outline: 2px solid rgb(var(--primary));
+    outline-offset: 2px;
+    border-color: transparent;
+  }
+
+  .skeleton {
+    background-color: rgb(var(--surface-2));
+    animation: shimmer 1.4s infinite;
+    border-radius: var(--radius-input);
+  }
+
+  @keyframes shimmer {
+    0%, 100% { opacity: 0.58; }
+    50% { opacity: 1; }
+  }
+}
+
+.job-detail-panel {
+  isolation: isolate;
+  background-color: rgb(var(--surface)) !important;
+  color: rgb(var(--text));
+  box-shadow: -24px 0 64px rgb(2 6 23 / 0.28);
+}
+
+.job-detail-meta,
+.job-detail-description {
+  background-color: rgb(var(--surface-2)) !important;
+  color: rgb(var(--text));
+}
+
+.job-detail-meta span,
+.job-detail-description p {
+  color: rgb(var(--text));
+}

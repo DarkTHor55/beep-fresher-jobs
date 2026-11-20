@@ -1,0 +1,10 @@
+/target/
+/data/*.mv.db
+/data/*.trace.db
+/data/*.lock.db
+/application-secrets.properties
+/hs_err_pid*.log
+/replay_pid*.log
+/.env
+/.env.*
+!/.env.example

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-BeepJobsApplication<jobs-aggregator>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.beep.jobs.BeepJobsApplication",
+            "projectName": "jobs-aggregator",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
